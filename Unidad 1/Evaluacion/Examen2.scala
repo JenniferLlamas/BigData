@@ -35,7 +35,7 @@ df.select($"Close"< 600).count()
 
 
 val totalC = df.filter($"High" > 500 ).count()
-var porcentaje = totalC * 100 / df.count();
+var porcentaje = (totalC * 100).toDouble / df.count().toDouble
 println(s"Porcentaje de High mayor a 500: $porcentaje")
 
 
