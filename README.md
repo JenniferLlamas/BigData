@@ -21,7 +21,7 @@ import org.apache.spark.ml.evaluation.ClusteringEvaluator
 
 
 ## Código
-```
+```Scala
 val kmeans = new KMeans().setK(3).setSeed(1L)
 val model = kmeans.fit(data)
 
