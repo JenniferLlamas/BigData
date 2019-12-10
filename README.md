@@ -3,7 +3,7 @@ Unidad 3 - Implementacion del Algoritmo K-means con Scala-Spark
 
 ## Concepto de Clustering
 
-Es una técnica de aprendizaje automático que implicaLa agrupación de puntos de datos. Dado un conjunto de puntos de datos, podemos usar un algoritmo de agrupamiento para clasificar cada punto de datos en un grupo específico.
+Es una técnica de aprendizaje automático que implica la agrupación de puntos de datos. Dado un conjunto de puntos de datos, podemos usar un algoritmo de agrupamiento para clasificar cada punto de datos en un grupo específico.
 
 ## Algoritmo Kmeans
 
@@ -28,4 +28,5 @@ val model = kmeans.fit(data)
 // Impresion de los centroides
 println("Cluster Centers: ")
 model.clusterCenters.foreach(println)
+
 ```
