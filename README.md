@@ -3,8 +3,8 @@ Unidad 3 - Implementacion del Algoritmo K-means con Scala-Spark
 
 ## Concepto de Clustering
 
-```es una técnica de aprendizaje automático que implicaLa agrupación de puntos de datos. Dado un conjunto de puntos de datos, podemos usar un algoritmo de agrupamiento para clasificar cada punto de datos en un grupo específico.
-```
+Es una técnica de aprendizaje automático que implicaLa agrupación de puntos de datos. Dado un conjunto de puntos de datos, podemos usar un algoritmo de agrupamiento para clasificar cada punto de datos en un grupo específico.
+
 ## Algoritmo Kmeans
 
 K-Means es un algoritmo no supervisado de Clustering. Se utiliza cuando tenemos un montón de datos sin etiquetar. El objetivo de este algoritmo es el de encontrar «K» grupos (clusters) entre los datos crudos.
