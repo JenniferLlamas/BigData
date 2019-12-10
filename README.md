@@ -18,3 +18,14 @@ import org.apache.spark.ml.evaluation.ClusteringEvaluator
 1. Inicialización: una vez escogido el número de grupos, k, se establecen k centroides en el espacio de los datos, por ejemplo, escogiéndolos aleatoriamente.
 2. Asignación objetos a los centroides: cada objeto de los datos es asignado a su centroide más cercano.
 3. Actualización centroides: se actualiza la posición del centroide de cada grupo tomando como nuevo centroide la posición del promedio de los objetos pertenecientes a dicho grupo.
+
+
+## Código
+```
+val kmeans = new KMeans().setK(3).setSeed(1L)
+val model = kmeans.fit(data)
+
+// Impresion de los centroides
+println("Cluster Centers: ")
+model.clusterCenters.foreach(println)
+```
