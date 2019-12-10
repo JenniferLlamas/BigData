@@ -9,9 +9,6 @@ Es una técnica de aprendizaje automático que implicaLa agrupación de puntos d
 
 K-Means es un algoritmo no supervisado de Clustering. Se utiliza cuando tenemos un montón de datos sin etiquetar. El objetivo de este algoritmo es el de encontrar «K» grupos (clusters) entre los datos crudos.
 
-```Libreria de Scala para usar el algoritmo
-import org.apache.spark.ml.clustering.KMeans	
-```
 ## Implementacion
 ```Scala
 import org.apache.spark.ml.clustering.KMeans
