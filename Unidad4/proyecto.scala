@@ -11,6 +11,9 @@ data.printSchema
 //visualizacion de algunos datos del dataframe
 data.show(5)
 
+
+
+
 //seleccion de columnas a utilizar
 val data_toWork = data.select("age","job","marital","default","balance","housing","loan","previous","poutcome","y")
 
@@ -72,6 +75,9 @@ import org.apache.spark.ml.classification.LogisticRegression
 
 val Array(training, test) = toAnalizeData.randomSplit(Array(0.7, 0.3), seed = 12345)
 
+val runtime1 = Runtime.getRuntime
+val startTimeMillis1 = System.currentTimeMillis()
+
 val lr = new LogisticRegression()
 
 val model = lr.fit(toAnalizeData)
@@ -82,6 +88,17 @@ println(s"Intercepcion: \n${model.interceptVector}")
 val trainingSummary = model.summary
 val accuracyLR = trainingSummary.accuracy
 println(s"Precision: $accuracyLR\n")
+
+var mb = 0.000001
+println("Used Memory: " + (runtime1.totalMemory - runtime1.freeMemory) * mb)
+println("Free Memory: " + runtime1.freeMemory * mb)
+println("Total Memory: " + runtime1.totalMemory * mb)
+println("Max Memory: " + runtime1.maxMemory * mb)
+
+
+val endTimeMillis1 = System.currentTimeMillis()
+val durationSeconds1 = (endTimeMillis1 - startTimeMillis1) / 1000
+
 
 
 //--------------------------Decision Tree-------------------------------
@@ -95,25 +112,42 @@ import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 val labelIndexer = new StringIndexer().setInputCol("label").setOutputCol("indexedLabel").fit(toAnalizeData)
 val featureIndexer = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4).fit(toAnalizeData)
 
+//empezar conteo de tiempo
+val runtime2 = Runtime.getRuntime
+val startTimeMillis2 = System.currentTimeMillis()
+
 val dt = new DecisionTreeClassifier().setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures")
 
 val labelConverter = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(labelIndexer.labels)
 val pipeline = new Pipeline().setStages(Array(labelIndexer, featureIndexer, dt, labelConverter))
 
-val predictions = model.transform(testData)
+val predictions = model.transform(training)
 predictions.show(5)
 
 //predictions.select("predictedLabel", "label", "features").show(5)
 
 val evaluator = new MulticlassClassificationEvaluator().setLabelCol("label").setPredictionCol("prediction").setMetricName("accuracy")
 val accuracyDT = evaluator.evaluate(predictions)
+
+val endTimeMillis2 = System.currentTimeMillis()
+val durationSeconds2 = (endTimeMillis2 - startTimeMillis2) / 1000
+
 println(s"Precision: $accuracyDT")
 
+mb = 0.000001
+println("Used Memory: " + (runtime2.totalMemory - runtime2.freeMemory) * mb)
+println("Free Memory: " + runtime2.freeMemory * mb)
+println("Total Memory: " + runtime2.totalMemory * mb)
+println("Max Memory: " + runtime2.maxMemory * mb)
 
 //-----------------------------------------SVM--------------------------------------------
 import org.apache.spark.ml.classification.LinearSVC
 import org.apache.spark.ml.classification.{LogisticRegression, OneVsRest}
 
+
+//Empezar conteo del tiempo
+val runtime3 = Runtime.getRuntime
+val startTimeMillis3 = System.currentTimeMillis()
 
 val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
 
@@ -127,8 +161,24 @@ println(s"Coeficientes: ${lsvcModel.coefficients} Intercepciones: ${lsvcModel.in
 val evaluatorSVM = new MulticlassClassificationEvaluator().setMetricName("accuracy")
 
 val accuracySVM = evaluatorSVM.evaluate(predictionsSVM)
+
+val endTimeMillis3 = System.currentTimeMillis()
+val durationSeconds3 = (endTimeMillis3 - startTimeMillis3) / 1000
+
+mb = 0.000001
+println("Used Memory: " + (runtime3.totalMemory - runtime3.freeMemory) * mb)
+println("Free Memory: " + runtime3.freeMemory * mb)
+println("Total Memory: " + runtime3.totalMemory * mb)
+println("Max Memory: " + runtime3.maxMemory * mb)
+
+
 //------------------------------------------Results -----------------------------------------
 println("--------------- Resultados -----------------------")
 val results = (accuracyLR*100,accuracyDT*100,accuracySVM*100)
+val tiempos = (durationSeconds1,durationSeconds2,durationSeconds3)
+val memoria = (runtime1.maxMemory,runtime2.maxMemory,runtime3.maxMemory)
 println(results)
+print(tiempos)
+print(memoria)
+
 println("F I N A L      B A A A A M M M !")

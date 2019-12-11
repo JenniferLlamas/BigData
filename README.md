@@ -148,18 +148,22 @@ Para la utilizacion de los algoritmos se tienen que convertir los datos a tipo n
 
 
 ## Resultados
-Los resultados de la ejecución de los algoritmos escogidos se muestran en la siguiente tabla
+Los resultados de la ejecución de los algoritmos escogidos se muestran en la siguiente tabla. Esto obteniendo un promedio de las multiples ejecuciones de los algoritmos.
 
- Algoritmo | Precisión |
+ Algoritmo | Precisión | Tiempo | Memoria Minima |Memoria Maxima |
  ------------- | ------------- |
- Logistic Regresion | 89.2944 %  |
- Decision Tree  | 89.8603 %  |
- LSVM  | 88.8728 %  |
+ Logistic Regresion | 89.2944 %  | 11 segundos  | 248  | 364  |
+ Decision Tree  | 89.8603 %  | 7.4 segundos |   | 323  | 487 
+ LSVM  | 88.8728 %  | 20.14 segundos  | 291  | 451
 
-Si bien la primera corrida de SVM tardo mas tiempo en realizar el cálculo, la segunda vez que se ejecutó realizo el cálculo en un tiempo mucho menor que los otros dos algoritmos, aun cuando se le modifico el parámetro C de 0.1 a 1.
+
+
+
+Si bien la primera corrida de SVM tardo mas tiempo en realizar el cálculo, la segunda vez que se ejecutó realizo el cálculo en un tiempo mucho menor aun cuando se le modifico el parámetro C de 0.1 a 1. Sin embargo seguia siendo considerablemente lento a comparacion del tiempo de ejecucion de los otros dos algoritmos.
 
 Se puede notar que los resultados mostrados por el algoritmo Decisión Tree son más precisos que los otros dos algoritmos por lo que para la toma de decisión sobre los datos obtenidos, se confía mas en lo que Decision Tree obtenga.
 
+Ademas se observo que durante las multipes ejecuciones de los algoritmos el rendimiento en cuestion de tiempo siempre fue mejor Decision Tree, aun cuando los recursos consumos fuesen un poco mayores que Logistic Regression. Y al final Linear Suppor Machine se queda en el ultimo lugar por la gran cantidad de recursos consumidos y el tiempo en ejecucion que es considerablemente mas tardado que cualquiera de los otros dos algoritmos. 
 
 ## Conclusiones
 
