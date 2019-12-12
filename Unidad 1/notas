@@ -1,0 +1,37 @@
+Número de elementos de una lista:
+
+def numElems(lista:List[Int]):Int = 
+   if (lista.isEmpty) 0 else 
+      1 + numElems(lista.tail)
+Por ejemplo:
+
+numElems(List(1,2,3,4,5))
+⇒ Int = 5
+Inserción en una lista ordenada:
+
+def insert(x: Int, lista: List[Int]) : List[Int] = 
+   if (lista == Nil) x :: Nil else
+      if (x < lista.head) x :: lista else 
+         lista.head :: insert(x, lista.tail)
+Por ejemplo:
+
+insert(10, List(-10, -2, 0, 30, 54))
+⇒ List[Int] = List(-10, -2, 0, 10, 30, 54)
+Ordenación de una lista:
+
+def sort(lista: List[Int]): List[Int] =
+   if (lista.isEmpty) Nil else 
+      insert(lista.head, sort(lista.tail))
+Por ejemplo:
+
+sort(List(20,-1,3,34,-10))
+⇒ List[Int] = List(-10, -1, 3, 20, 34)
+Y, por último, inversión de una lista:
+
+def reverse(lista: List[Int]) : List[Int] = 
+   if (lista.isEmpty) Nil else 
+      reverse(lista.tail) ::: List(lista.head)
+Por ejemplo:
+
+reverse(List(2,5,10,12))
+⇒ List[Int] = List(12, 10, 5, 2)
